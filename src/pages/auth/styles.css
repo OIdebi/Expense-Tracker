@@ -1,68 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Codystar:wght@300;400&display=swap');
+
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 .login-page {
     width: 100vw;
-    height: calc(100vh);
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    color: white;
+    background: #9e9c9c;
+}
+
+.login-card{
+    background: #fff;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, #ffffff, #000000);
+    align-content: center;
+    justify-items: center;
+}
+
+.login-card_container{
+
+    max-width: 25rem;
     display: flex;
     flex-direction: column;
+}
+
+.login-title {
+    font-size: 2rem;
+    text-align: left;
+    position: absolute;
+    margin: 2rem;
+    font-family: "Codystar", sans-serif;
+    font-style: normal;
+}
+
+.login-subtitle {
+    font-size: 1rem;
+    color: #dfdfdf;
+    margin: 5px 0 20px 0;
+}
+
+.login-card_button_section{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* SIGN IN BUTTON/s */
+.login-with-google-btn,
+.login-as-guest-btn{
+    width: 100%;
+    min-height: 40px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
     justify-content: center;
-    align-content: center;
-    color: white;
-    text-shadow: -1px 2px 6px rgba(2, 48, 71, 054);
-    background: rgb(0, 204, 255);
-    background: linear-gradient(
-        45deg,
-        rgba(0, 204, 255, 1) 0%,
-        rgba(115, 33, 188, 1) 100%
-    );
-}
+    border-radius: 0.5rem;
 
-.login-page p {
-    font-size: 50px;
-    font-weight: bold;
-}
+    padding: 0.6rem;
 
-/* SIGN IN BUTTON */
-/* SIGN IN BUTTON */
-.login-with-google-btn {
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    display: flex;
-    text-align: center;
-    justify-content: space-between;
-    padding: 10px 16px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
-    font-size: 25px;
-    font-weight: 500;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-    background-color: white;
-    background-repeat: no-repeat;
-    background-position: 12px 11px;
-    margin-top: 5%;
+    transition: background-color 0.5s, box-shadow 0.5s;;
+
+    border: 1px solid #2e2e2e;
+    /*font-weight: bold;*/
+
+
+}
+.login-with-google-btn{
+    background: #ffffff;
+    color: #444;
 }
 
-.login-with-google-btn img {
-    max-width: 40px;
-    margin-right: 10px;
+.login-as-guest-btn{
+    background: #000000;
+    color: white;
 }
 
-.login-with-google-btn:hover {
+.login-with-google-btn img{
+    width: 25px;
+    justify-self: center;
+    /*margin-right: 10px;*/
+}
+
+.divider {
+    display: flex;              /* enable flex layout */
+    align-items: center;        /* vertically center text and lines */
+    text-align: center;         /* center text inside the flex item */
+    font-size: 1rem;            /* adjust as needed */
+    color: white;                /* text color */
+    margin: 0.5rem 0;           /* vertical spacing */
+}
+
+.divider::before,
+.divider::after {
+    content: "";                /* generate a pseudo-element */
+    flex: 1;                    /* take up equal remaining space */
+    height: 1px;                /* line thickness */
+    background-color: #ccc;     /* line color */
+    margin: 0 0.75em;           /* spacing around the “OR” text */
+}
+
+.login-with-google-btn:hover,
+.login-as-guest-btn:hover{
     box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
+    background: none;
+    color: white;
+    border: 1px solid white;
 }
 
-.login-with-google-btn:active {
-    background-color: #eeeeee;
-}
+/*.login-with-google-btn:active {*/
+/*    background-color: #eeeeee;*/
+/*}*/
 
-.login-with-google-btn:focus {
-    outline: none;
-    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25), 0 0 0 3px #c8dafc;
-}
+/*.login-with-google-btn:focus {*/
+/*    outline: none;*/
+/*    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25), 0 0 0 3px #c8dafc;*/
+/*}*/
 
-.login-with-google-btn:disabled {
-    filter: grayscale(100%);
-    background-color: #ebebeb;
-    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
-    cursor: not-allowed;
+/*.login-with-google-btn:disabled {*/
+/*    filter: grayscale(100%);*/
+/*    background-color: #ebebeb;*/
+/*    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);*/
+/*    cursor: not-allowed;*/
+/*}*/
+
+.login-hero{
+    background-image: url("/images/expense-image.jpg");
+    margin: 1rem;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-content: center;
+    justify-items: center;
 }

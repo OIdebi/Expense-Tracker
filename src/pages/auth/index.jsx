@@ -22,16 +22,64 @@ const Auth = () =>  {
         navigate('/expense-tracker');
     }
 
+    const continueAsGuest = () => {
+        const guestInfo = {
+            userID: 'guest_' + Date.now(),
+            name: 'Guest User',
+            profilePhoto: '',
+            isAuth: true,
+            isGuest: true,
+        };
+        localStorage.setItem('auth', JSON.stringify(guestInfo));
+        navigate('/expense-tracker');
+    }
+
     if (isAuth) {
         return <Navigate to='/expense-tracker' />
     }
 
 
-
     return (
         <div className='login-page'>
-            <p>Sign In with Google to Continue</p>
-            <button className='login-with-google-btn' onClick={signInWithGoogle}><img className='login-btn-img' src="https://www.gstatic.com/marketing-cms/assets/images/d5/dc/cfe9ce8b4425b410b49b7f2dd3f3/g.webp=s48-fcrop64=1,00000000ffffffff-rw" alt=""/> Sign In With Google </button>
+            <p className='login-title'>Expense-Calc</p>
+            <div className='login-card'>
+
+                <div className='login-card_container'>
+                    <h1 id='auth-heading' className='welcome-title'>
+                        Welcome back...
+                    </h1>
+                    <p className='login-subtitle'>
+                        Choose How you would like to log in.
+                        {/*Check your Income and Expanse Difference*/}
+                    </p>
+                    <div className='login-card_button_section'>
+                        <button
+                            className='login-with-google-btn'
+                            onClick={signInWithGoogle}
+                            aria-label='Sign in with Google'
+
+                        >
+                            <img
+                                src='/images/google-icon.png'
+                                alt='Google'
+                            />
+                            Sign in with Google
+                        </button>
+                        <span className='divider'> <hr/> OR <hr/> </span>
+                        <button
+                            className='login-as-guest-btn'
+                            onClick={continueAsGuest}
+                            aria-label='Continue as guest'
+                        >
+                            <img src="" alt=""/>
+                            continue as guest
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div className='login-hero'>
+            </div>
         </div>
     );
 }
