@@ -1,70 +1,304 @@
-.expense-tracker {
-    width: 100vw;
+.expense-tracker-page {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1.5fr 2fr;
+    grid-template-areas:
+            "profile input"
+            "report record";
+
+    background: #353535;
+    color: #e8e8e8;
+}
+
+/* ---- Profile section ----*/
+.expense-tracker-profile {
+    grid-area: profile;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    color: #023047;
-
-    h1 {
-        font-size: 40px;
-    }
-    button{
-        margin: 10px;
-    }
+    /*background: linear-gradient(45deg, #717171, #202020);*/
 }
 
 .profile {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 200px;
+    gap: 1rem;
 }
 
 .profile-photo {
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 200px;
+    max-height: 200px;
     object-fit: cover;
     border-radius: 50%;
 }
 
+.profile-info{
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.profile-info h3{
+    font-weight: normal;
+}
 
 
-.sign-out-button, .delete-button {
+
+.sign-out-button, .delete-button, .submit-btn {
     border: none;
-    margin: 50px;
+    margin-top: 10px;
     width: 150px;
     border-radius: 10px;
     color: white;
     font-weight: bold;
     padding: 10px 20px;
     text-decoration: none;
+    transition: background-color 0.5s, box-shadow 0.5s;
+    display: block;
 }
 .sign-out-button {
-    background: #3498db;
+    background-color: #4d96c6;
+    border: 1px solid #4d96c6;
     background-image: linear-gradient(to bottom, #3498db, #2980d9);
+    transition: background-color 0.5s, box-shadow 0.5s;
 }
 
 .sign-out-button:hover {
-    background: #3cb0fd;
+    background: rgba(108, 158, 195, 0.2);
+    color: #4d96c6;
 }
 
 .delete-button {
-    background: #e74c3c;
+    background-color: #ff1500;
+    border: 1px solid #ff1500;
     background-image: linear-gradient(to bottom, #e74c3c, #d92929);
 }
 
 .delete-button:hover {
-    background: #e74c3c;
+    background: rgba(231, 76, 60, 0.2);
+    color: red;
+}
+
+/* ---- Report section ----*/
+.expense-tracker-report {
+    grid-area: report;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.summary-info {
+    border: 1px solid #5a5a5a;
+    background: #303030;
+    width: 500px;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    padding: 1rem;
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(151, 151, 151, 0.25);
+}
+
+.summary-info p, .summary-info h2 {
+    justify-self: end;
+}
+
+/* ---- Input section ----*/
+.expense-tracker-input {
+    grid-area: input;
+    justify-content: center;
+    padding: 0 2rem;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    background: #3e3e3e;
+}
+
+.expense-tracker-input h2 {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+}
+
+.add-transaction {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    flex-direction: row;
+    gap: 1rem;
+}
+
+/* Form groups */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
+.form-group label {
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+    border-color: #2980d9;
+    box-shadow: 0 0 0 3px rgba(41,128,185,0.1);
+    outline: none;
+}
+
+/* Radio group */
+.radio-group {
+    border: none;
+    padding: 0;
+    display: flex;
+}
+
+.radio-group legend {
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.95rem;
+
+}
+
+.radio-group input {
+    accent-color: #2980d9;
+}
+
+
+.submit-btn{
+    background-color: #28a745;
+    background-image: linear-gradient(to bottom, #28a745, #218838);
+    border: 1px solid #28a745;
+    margin-top: 1.75rem;
+}
+
+.submit-btn:hover {
+    background: rgba(40, 167, 69, 0.2);
+    color: #28a745;
+}
+
+/* ---- Records section ----*/
+.expense-tracker-records {
+    grid-area: record;
+    display: flex;
+    flex-direction: column;
+    color: #2e2e2e;
+    background: #3e3e3e;
 }
 
 .transactions {
-    margin-left: 430px;
-    margin-top: 20px;
-    padding-left: 10px;
-    width: 600px;
-    height: 400px;
-    overflow: auto;
-    border: 3px solid #023047;
+    justify-self: center;
+    height: 70%;
+    overflow-y: auto;
+    max-width: 800px;
+    border-radius: 1rem;
+    flex: 1;
+    background: #3e3e3e;
+    margin: 0 1rem 1rem ;
+    border: 2px solid white;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
 
 }
+/*.expense-tracker {*/
+/*    width: 100vw;*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    color: #023047;*/
+
+/*    h1 {*/
+/*        font-size: 40px;*/
+/*    }*/
+/*    button{*/
+/*        margin: 10px;*/
+/*    }*/
+/*}*/
+
+
+
+
+
+/* Sticky header */
+.transactions h3 {
+    position: sticky;
+    top: 0;
+    background: #f9f9f9;
+    margin: 0;
+    font-size: 1.25rem;
+    border-bottom: 1px solid #ddd;
+    z-index: 1;
+    padding: 1rem 1.5rem;
+}
+
+/* Clean list reset */
+.transactions ul {
+    list-style: none;
+    margin: 0;
+    padding: 0.7rem;
+}
+
+/* Card-style list items */
+.transactions li {
+    background: #f6f6f6;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.2s;
+}
+
+/* Hover state for affordance */
+.transactions li:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.56);
+}
+
+.transactions li h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.transactions li p {
+    margin: 0;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Expense/income badge */
+.transactions li p label {
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.transactions li p label.expense {
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+}
+
+.transactions li p label.income {
+    background: rgba(46, 204, 113, 0.1);
+    color: #2ecc71;
+}
+
+
