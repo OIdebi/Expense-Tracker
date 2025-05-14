@@ -3,7 +3,7 @@ import { signInWithPopup } from 'firebase/auth'
 import { auth, provider} from "../../config/firebase-config.js";
 import { useNavigate, Navigate } from 'react-router-dom'
 import useGetUserinfo from '../../hooks/useGetUserinfo';
-import './styles.css'
+import '../../styles/auth-styles.css'
 
 const Auth = () =>  {
 
@@ -11,22 +11,31 @@ const Auth = () =>  {
     const {isAuth} = useGetUserinfo();
 
     const signInWithGoogle = async () => {
-        const results =  await signInWithPopup(auth, provider);
-        const authInfo = {
-            userID: results.user.uid,
-            name: results.user.displayName,
-            profilePhoto: results.user.photoURL,
-            isAuth: true,
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+
+            // Build and save your authInfo
+            const authInfo = {
+                userID: user.uid,
+                name: user.displayName,
+                profilePhoto: user.photoURL,
+                isAuth: true,
+            };
+            localStorage.setItem('auth', JSON.stringify(authInfo));
+
+            // Navigate immediately after popup resolves
+            navigate('/expense-tracker');
+        } catch (error) {
+            console.error('Popup sign-in error:', error);
         }
-        localStorage.setItem('auth', JSON.stringify(authInfo));
-        navigate('/expense-tracker');
-    }
+    };
 
     const continueAsGuest = () => {
         const guestInfo = {
             userID: 'guest_' + Date.now(),
             name: 'Guest User',
-            profilePhoto: '',
+            profilePhoto: 'images/guest.png',
             isAuth: true,
             isGuest: true,
         };
@@ -71,7 +80,7 @@ const Auth = () =>  {
                             onClick={continueAsGuest}
                             aria-label='Continue as guest'
                         >
-                            <img src="" alt=""/>
+                            <p></p>
                             continue as guest
                         </button>
                     </div>

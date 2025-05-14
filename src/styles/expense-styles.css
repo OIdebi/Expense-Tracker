@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    font-family: "Raleway", sans-serif;
+}
+
 .expense-tracker-page {
     height: 100vh;
     display: grid;
@@ -26,8 +32,8 @@
 }
 
 .profile-photo {
-    max-width: 200px;
-    max-height: 200px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     border-radius: 50%;
 }
@@ -44,7 +50,7 @@
 
 
 
-.sign-out-button, .delete-button, .submit-btn {
+.sign-out-button, .delete-button, .submit-btn{
     border: none;
     margin-top: 10px;
     width: 150px;
@@ -200,11 +206,13 @@
 
 .transactions {
     justify-self: center;
-    height: 70%;
+    height: 500px;
+    max-height: 700px;
     overflow-y: auto;
+    overflow-x: hidden;
     max-width: 800px;
     border-radius: 1rem;
-    flex: 1;
+    /*flex: 1;*/
     background: #3e3e3e;
     margin: 0 1rem 1rem ;
     border: 2px solid white;
@@ -283,7 +291,7 @@
 }
 
 /* Expense/income badge */
-.transactions li p label {
+.transactions li label {
     padding: 0.2rem 0.5rem;
     border-radius: 0.25rem;
     font-size: 0.75rem;
@@ -291,14 +299,31 @@
     text-transform: uppercase;
 }
 
-.transactions li p label.expense {
+.transactions li label.expense {
     background: rgba(231, 76, 60, 0.1);
     color: #e74c3c;
 }
 
-.transactions li p label.income {
+.transactions li label.income {
     background: rgba(46, 204, 113, 0.1);
     color: #2ecc71;
 }
 
+.delete-btn{
+    color: white;
+    background-color: rgba(255, 22, 0, 0.6);
+    border: none;
+    padding: 2px 5px;
+    cursor: pointer;
+    margin: 0 5px;
+    border-radius: 50%;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.2s, box-shadow 0.5s;
+}
+
+.delete-btn:hover {
+    background: rgba(231, 76, 60, 0.2);
+    color: red;
+}
 

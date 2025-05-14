@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
+import { useEffect, useState, useCallback } from 'react';
+import { collection, query, where, orderBy, onSnapshot, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../config/firebase-config.js';
 import useGetUserinfo from './useGetUserinfo';
 
@@ -14,56 +14,38 @@ const useGetTransactions = () => {
     const transactionCollectionRef = collection(db, 'transactions');
     const { userID } = useGetUserinfo();
 
-    const getTransactions = async () => {
-        let unsubscribe;
-        try {
-            const queryTransactions = query(
-                transactionCollectionRef,
-                where("userID", "==", userID),
-                orderBy("createdAt", )
-            );
-
-            unsubscribe = onSnapshot(queryTransactions, (snapshot) => {
-                let docs = [];
-                let totalIncome = 0;
-                let totalExpense = 0;
-
-                snapshot.forEach((doc) => {
-                    const data = doc.data();
-                    const id = doc.id;
-
-                    docs.push({...data, id });
-
-
-                    if (data.transactionType === "expense") {
-                        totalExpense += Number(data.transactionAmount);
-                    } else if (data.transactionType === "income") {
-                        totalIncome += Number(data.transactionAmount);
-                    }
-                    console.log(data.transactionType)
-                });
-                setTransactions(docs);
-
-                let balance = totalIncome - totalExpense;
-                setTransactionTotal({
-                    balance,
-                    income: totalIncome,
-                    expense: totalExpense,
-                })
-
-            });
-        } catch (err) {
-            console.error(err);
-        }
-
-        return () => unsubscribe();
-    };
-
     useEffect(() => {
-        getTransactions();
+        const queryTransactions = query(
+            transactionCollectionRef,
+            where('userID', '==', userID),
+            orderBy('createdAt'),
+        );
+
+        const unsubscribe = onSnapshot(queryTransactions, snapshot => {
+            let totalIncome = 0, totalExpense = 0;
+            const docs = snapshot.docs.map((docSnap) => {
+                const data = docSnap.data();
+                if (data.transactionType === 'income') totalIncome += Number(data.transactionAmount);
+                else totalExpense += Number(data.transactionAmount);
+                return { id: docSnap.id, ...data};
+            });
+            setTransactions(docs);
+            setTransactionTotal({
+                balance: totalIncome - totalExpense,
+                income: totalIncome,
+                expense: totalExpense,
+            });
+        });
+        return () => unsubscribe();
+    }, [userID]);
+
+    // Delete a transaction
+    const deleteTransaction = useCallback(async (id) => {
+        await deleteDoc(doc(db, 'transactions', id)); // Firebase deleteDoc()
+        setTransactions(prev => prev.filter(tx => tx.id !== id));  // update state
     }, []);
 
-    return { transactions, transactionTotal };
+    return { transactions, transactionTotal, deleteTransaction };
 };
 
 export default useGetTransactions;
