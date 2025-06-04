@@ -25,7 +25,7 @@ const TrackerForm = () => {
     return (
         <div className="expense-tracker-input">
             <h2>Add a Transaction</h2>
-            <form className="add-transaction" onSubmit={onSubmit} noValidate>
+            <form className="add-transaction" onSubmit={onSubmit}>
                 <div>
                     <div className="form-group">
                         <label htmlFor="description">Description</label>
@@ -34,8 +34,8 @@ const TrackerForm = () => {
                             type="text"
                             placeholder="E.g. Coffee, Groceries…"
                             value={description}
-                            required
                             onChange={e => setDescription(e.target.value)}
+                            required
                         />
                     </div>
 
@@ -50,8 +50,8 @@ const TrackerForm = () => {
                                 if (['e','E','+','-'].includes(e.key)) {
                                     e.preventDefault();
                                 }}}
-                            required
                             onChange={e => setTransactionAmount(e.target.value)}
+                            required
                         />
                     </div>
                 </div>
